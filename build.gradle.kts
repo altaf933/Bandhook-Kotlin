@@ -1,3 +1,8 @@
+import org.gradle.kotlin.dsl.extra
+import org.gradle.kotlin.dsl.getValue
+import org.gradle.kotlin.dsl.setValue
+import org.gradle.kotlin.dsl.repositories
+
 /*
  * Copyright (C) 2015 Antonio Leiva
  *
@@ -15,34 +20,22 @@
  */
 
 buildscript {
-    ext.kotlin_version = '1.1.1'
+
+    val config = ProjectConfiguration()
+
     repositories {
         jcenter()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath(config.buildPlugins.androidGradle)
+        classpath(config.buildPlugins.kotlinGradlePlugin)
     }
 }
 
 allprojects {
     repositories {
         jcenter()
-    }
-
-    ext {
-        // Android config
-        androidBuildToolsVersion = "25.0.2"
-        androidMinSdkVersion = 17
-        androidTargetSdkVersion = 25
-        androidCompileSdkVersion = 25
-        androidApplicationId = "com.antonioleiva.bandhookkotlin"
-        androidVersionCode = 1
-        androidVersionName = "0.1"
-        supportVersion = "25.3.0"
-        ankoVersion= "0.9.1a"
-        daggerVersion = "2.6"
-        retrofitVersion = "2.2.0"
-        okhttpVersion = "3.6.0"
+        google()
     }
 }
